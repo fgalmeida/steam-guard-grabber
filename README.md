@@ -28,6 +28,6 @@ Make sure that your account have steam guard enabled.
 2. Wait when the process is complete.
 
 ### Soon...
-[] Multiple accounts
+[ ] Multiple accounts
 
 Made with 🖤 by Felipe Almeida!
