@@ -1,75 +1,29 @@
+const reader = require("readline-sync");
 const SteamTotp = require("steam-totp");
 var SteamUser = require("steam-user");
-var fs = require("fs");
 const ReadLine = require("readline");
-const reader = require("readline-sync");
-const { exit } = require("process");
+var fs = require("fs");
 
-var i = 0;
-
-let rl = ReadLine.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-// Instance for bots
+// Instance for account
 var firstClient = new SteamUser();
 
-// Get Account:
-rl.question("Press Enter to Continue...\n", () => {
-  var text = fs.readFileSync("./account.txt").toString("utf-8");
-  var bot = text.split("\n");
-  var firstLogonOptions = {
-    accountName: bot[i].split(":")[0],
-    password: bot[i].split(":")[1],
-    twoFactorCode: SteamTotp.generateAuthCode(bot[i].split(":")[2]),
-  };
-  getAccount(
-    firstLogonOptions.accountName,
-    firstLogonOptions.password,
-    firstLogonOptions.twoFactorCode
-  );
-});
+// Config
+var config = JSON.parse(fs.readFileSync("./config.json"));
 
-function getAccount(accountName, password, twoFactorCode) {
-  new Promise((r) => setTimeout(r, 2000));
-  doLogin(accountName, password, twoFactorCode);
-  logged(twoFactorCode, accountName, password);
-}
+var firstLogonOptions = {
+  accountName: config.account.username,
+  password: config.account.password,
+  twoFactorCode: config.account.shared_secret,
+};
 
-// Login to the account:
-function doLogin(accountName, password, shared) {
-  firstClient.logOn({
-    accountName: accountName,
-    password: password,
-    twoFactorCode: shared,
-  });
-}
-
-// Steam Informations:
-function logged(shared, accountName, password, err) {
-  firstClient.on("loggedOn", () => {
-    (async () => {
-      console.log("Account: \n%s - Succesfully logged in", firstClient.steamID);
-      console.log("%s - Account Name", accountName);
-      console.log("%s - Account Password\n----------------------", password);
-      console.log(
-        `Steam Guard: \n%s - Steam Guard Code [30 Seconds]\n----------------------`,
-        SteamTotp.generateAuthCode(shared)
-      );
-      await new Promise((r) => setTimeout(r, 2000));
-      if (!err) {
-        firstClient.logOff();
-        console.log(
-          "[%s] Succesfully logged off\n----------------------",
-          firstClient.steamID
-        );
-      }
-      if (err) {
-        console.log("error posting: %s", err);
-      }
-      await new Promise((r) => setTimeout(r, 10000));
-      process.exit();
-    })();
-  });
-}
+console.log("----------------------\nAccount: \n%s - Succesfully logged in");
+console.log("%s - Account Name", firstLogonOptions.accountName);
+console.log("%s - Account Password", firstLogonOptions.password);
+console.log(
+  "%s - Account Shared Secret\n----------------------",
+  firstLogonOptions.twoFactorCode
+);
+console.log(
+  `Steam Guard: \n%s - Steam Guard Code [30 Seconds]\n----------------------`,
+  SteamTotp.getAuthCode(config.account.shared_secret)
+);
