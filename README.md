@@ -15,7 +15,7 @@ Created by Felipe Almeida (@fgalmeida)
 ### Installing:
 1. Download the latest stabe version of Node JS - nodejs.org
 2. Download and unpack the archive to any location
-3. Open PowerShell or command prompt (or terminal for Linux) in the folder with the bot. To do this enter: cd c:\path_to_the_folder or if you use Windows go to the needed folder in the explorer, then press SHIFT + right mouse, select: Open PowerShell window here
+3. Open PowerShell or command prompt (or terminal for Linux) in the folder. To do this enter: cd c:\path_to_the_folder or if you use Windows go to the needed folder in the explorer, then press SHIFT + right mouse, select: Open PowerShell window here
 4. Enter in the console: npm i or npm install
 
 ### Configuration:
