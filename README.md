@@ -7,11 +7,10 @@ Created by Felipe Almeida (@fgalmeida)
 ```
 
 ### How to work this script:
-1. Login to your limited account.
+1. Place your limited account in Steam Guard Grabber.
 2. Get your Steam Guard Code.
-3. Enter the steam with the account and put the Steam Guard Code.
+3. Enter in Steam with the account and put the Steam Guard Code.
 4. Amazing, now you can use and edit your account the way you want!
-
 
 ### Installing:
 1. Download the latest stabe version of Node JS - nodejs.org
@@ -20,7 +19,8 @@ Created by Felipe Almeida (@fgalmeida)
 4. Enter in the console: npm i or npm install
 
 ### Configuration:
-1. `account.txt`. This is text file with login detail of account (limited steam account), format: `username:password:shared_secret` in each line.
+1. `config.json`. This is file with login detail of account (limited steam account),
+format: `{"account": { "shared_secret": "hrqhKTbNI7zW7OSBamUEYvkhDV0", "username": "i0o3lkc4lk3hhm08fam8", "password": "N1WFJQ5HLKPG730"}}` in each line.
 Make sure that your account have steam guard enabled. 
 
 ### Using:
