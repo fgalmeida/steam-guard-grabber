@@ -1,7 +1,4 @@
-const reader = require("readline-sync");
 const SteamTotp = require("steam-totp");
-var SteamUser = require("steam-user");
-const ReadLine = require("readline");
 var fs = require("fs");
 
 // Instance for account
